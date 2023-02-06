@@ -23,7 +23,11 @@ User - Home
                             <h5 class="fw-bold">Patient Details</h5>
 
                             <ul style="list-style: none;padding-left: 0;">
+                                {%  if current_user.is_doctor %}
+                                <li><p><strong>Dr.</strong> {{ current_user.name }}</p></li>
+                                {% else %}
                                 <li><p>{{ current_user.name }}</p></li>
+                                {% endif %}
                                 <li><p>{{ current_user.gender }}</p></li>
                                 <li><p>{{ current_user.dob.strftime('%d-%m-%Y') }}</p></li>
                             </ul>

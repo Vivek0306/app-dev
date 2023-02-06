@@ -1,1 +1,8 @@
 FLASK_ENV=development FLASK_APP=app.py flask run
+
+
+create new migration 
+> flask db migrate
+
+apply migration to db
+>flask db upgrade

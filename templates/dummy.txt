@@ -1,57 +1,66 @@
-                    <!-- <div class="mb-3">
-                        <label class="form-label lead">Full Name</label>
-
-                        {{ form.fullname(class="form-control") }}
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label lead">Address</label>
-                        {{ form.address(class="form-control") }}
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label lead">City</label>
-                        {{ form.city(class="form-control") }}
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label lead">Date of Birth</label>
-                        {{ form.dob(class="form-control") }}
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label lead">Mobile No.</label>
-                        {{ form.mobile(class="form-control") }}
-                    </div> -->
-                    <!-- <div class="mb-3">
-                        <label class="form-label lead">Gender</label>
-                        {{ form.gender }}
-                    </div> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
+    <title>{% block title %}{% endblock %}</title>
 
 
 
-    # gender = RadioField('Gender', choices=[('Male'),('Female'),('Other')])
-
-
-    # fullname = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Full Name"})
-
-                        # address = StringField(validators=[InputRequired(), Length(min=4, max=100)], render_kw={"placeholder": "Address"})
-    # mobile = StringField(validators=[InputRequired(), Length(min=10, max=12)], render_kw={"placeholder": "Mobile No."})
-    # city = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder": "City"})
-    # dob = DateField(validators=[InputRequired()],render_kw={"placeholder": "Date of Birth"}, format='%D-%M-%Y' )
-
-    # confirm = PasswordField(validators=[InputRequired(), Length(min=4, max=20), EqualTo('confirm', message='Passwords must match')], render_kw={"placeholder": "Confirm Password"})
+    <link rel="apple-touch-icon" sizes="180x180" href="static/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/favicons/favicon.ico">
+    <link rel="manifest" href="static/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="static/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
 
 
 
+    <link href="static/css/theme.css" rel="stylesheet" />
+    <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body>
+    <main class="main" id="top">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center fw-bold fs-2" href="#"><img class="d-inline-block me-3" src="static/img/icons/logo.png" alt="" />VOS Clinics</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse border-lg-0 mt-4 mt-lg-0der-top " id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
+                        <li class="nav-item"><a class="nav-link fw-bold active" aria-current="page" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">My Consultations</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{  url_for('appointment') }}">Book an Appointment</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><strong>{{ current_user.username.capitalize() }}</strong></a></li>
+                        <li class="nav-item"><a class="nav-link fw-bold btn btn-danger" href="{{url_for('logout')}}">Logout</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <br><br>
+        <div class="wrapper" style="height: 80%;">
+            <div class="container">
+                {% block main%}{% endblock %}
+            </div>
+        </div>
+    </main>
 
 
 
-    # class Patient(db.Model, UserMixin):
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     name = db.Column(db.String(50), nullable=False)
-#     address = db.Column(db.String(80), nullable=False)
-#     city = db.Column(db.String(30), nullable=False)
-#     dob = db.Column(db.Date)
-#     gender = db.Column(db.String(10), nullable=False)
-#     mobile = db.Column(db.Integer)
+    <script src="static/vendors/@popperjs/popper.min.js"></script>
+    <script src="static/vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="static/vendors/is/is.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="static/js/theme.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&amp;display=swap" rel="stylesheet">
+</body>
+</html>
