@@ -1,0 +1,57 @@
+                    <!-- <div class="mb-3">
+                        <label class="form-label lead">Full Name</label>
+
+                        {{ form.fullname(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label lead">Address</label>
+                        {{ form.address(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label lead">City</label>
+                        {{ form.city(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label lead">Date of Birth</label>
+                        {{ form.dob(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label lead">Mobile No.</label>
+                        {{ form.mobile(class="form-control") }}
+                    </div> -->
+                    <!-- <div class="mb-3">
+                        <label class="form-label lead">Gender</label>
+                        {{ form.gender }}
+                    </div> -->
+
+
+
+
+
+
+    # gender = RadioField('Gender', choices=[('Male'),('Female'),('Other')])
+
+
+    # fullname = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Full Name"})
+
+                        # address = StringField(validators=[InputRequired(), Length(min=4, max=100)], render_kw={"placeholder": "Address"})
+    # mobile = StringField(validators=[InputRequired(), Length(min=10, max=12)], render_kw={"placeholder": "Mobile No."})
+    # city = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder": "City"})
+    # dob = DateField(validators=[InputRequired()],render_kw={"placeholder": "Date of Birth"}, format='%D-%M-%Y' )
+
+    # confirm = PasswordField(validators=[InputRequired(), Length(min=4, max=20), EqualTo('confirm', message='Passwords must match')], render_kw={"placeholder": "Confirm Password"})
+
+
+
+
+
+
+    # class Patient(db.Model, UserMixin):
+#     id = db.Column(db.Integer, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+#     name = db.Column(db.String(50), nullable=False)
+#     address = db.Column(db.String(80), nullable=False)
+#     city = db.Column(db.String(30), nullable=False)
+#     dob = db.Column(db.Date)
+#     gender = db.Column(db.String(10), nullable=False)
+#     mobile = db.Column(db.Integer)

@@ -1,0 +1,24 @@
+{% extends "dashboard.html" %}
+{% block title %}
+Appointment
+{% endblock %}
+
+{% block main %}
+
+<div class="home-dashboard">
+    <div class="container">
+        <h1>Appointment Page</h1>
+        <form method="post">
+            {{ form.hidden_tag() }}
+            {{ form.slot.label }} {{ form.slot(class = "form-control") }}
+            {{ form.date.label }} {{ form.date }}
+            {{ form.submit() }}
+        </form>
+          
+    </div>
+</div>
+
+
+
+
+{% endblock %}

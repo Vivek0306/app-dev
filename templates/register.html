@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block main %}
+<section class="signup">
+    <div class="container-lg">
+        <div class="row justify-content-center">
+        <div class="col-3 text-center">
+            <h2 class="fw-bold">Patient Details</h2>
+            <hr class="w-25 mx-auto text-dark" style="height:2px;" />
+        </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-9 col-xl-8 text-center">
+                <p>Please enter your details below</p>
+            </div>
+            <div style="width: 70%;">
+                <form action="" method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        <label class="form-label lead">Full Name</label>
+
+                        {{ form.fullname(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label lead">Address</label>
+                        {{ form.address(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label lead">City</label>
+                        {{ form.city(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label lead">Mobile No.</label>
+                        {{ form.mobile(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label lead">Gender</label>
+                        {{ form.gender }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label lead">Date of Birth</label>
+                        {{ form.dob }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label lead">Username</label>
+                        {{ form.username(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label lead">Password</label>
+                        {{ form.password(class="form-control") }}
+                    </div>
+                    <!-- <div class="mb-3">
+                        <label class="form-label lead">Confirm Password</label>
+                        {{ form.password(class="form-control") }}
+                    </div> -->
+                    {{ form.submit(class="btn btn-success") }}
+                </form>
+                Have an account? <a href="{{ url_for('login') }}"> Sign in here </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
