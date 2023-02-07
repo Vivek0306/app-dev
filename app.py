@@ -182,7 +182,7 @@ def doctorlogin():
 def home():
     check_user = User.query.filter_by(id = current_user.id).first()
     if check_user.is_doctor:
-        appointments = db.session.query(Appointment, User).join(User).all()
+        appointments = db.session.query(Appointment, User).join(User).filter(Appointment.date == date.today()).order_by(Appointment.date).all()
     else:
         appointments = Appointment.query.filter_by(user_id = current_user.id).all()
 
