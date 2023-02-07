@@ -26,17 +26,24 @@ User - Home
                 <th scope="col">Age</th>
                 <th scope="col">DOB</th>
                 <th scope="col">Slot</th>
+                <th scope="col">Actions</th>
                 <!-- <th scope="col">Avg. Price</th> -->
               </tr>
             </thead>
             <tbody>
               {% for appointment in appointments %}
-                <tr>
+                <tr id="{{ loop.index }}">
                   <td>{{ loop.index }}</td>
                   <td>{{ appointment.User.name }}</td>
                   <td>{{ appointment.User.dob|calculate_age }}</td>
                   <td>{{ appointment.User.dob.strftime('%d-%m-%Y') }}</td>
                   <td>{{ appointment.Appointment.slot.capitalize() }}</td>
+                  <td>
+                    <a href="#"><i class="fas fa-plus fa-fw me-3"></i></a> 
+                    <span>
+                      <a href="#"><i class="fas fa-minus fa-fw me-3"></i></a>
+                    </span>
+                  </td>
                 </tr> 
               {% endfor %}
             </tbody>
@@ -73,7 +80,7 @@ User - Home
   <!--Section: Sales Performance KPIs-->
 
   <!--Section: Minimal statistics cards-->
-  <section>
+  <!-- <section>
     <div class="row">
       <div class="col-xl-3 col-sm-6 col-12 mb-4">
         <div class="card">
@@ -284,7 +291,7 @@ User - Home
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!--Section: Minimal statistics cards-->
 
   <!--Section: Statistics with subtitles-->
@@ -296,9 +303,9 @@ User - Home
             <div class="d-flex justify-content-between p-md-1">
               <div class="d-flex flex-row">
                 <div class="align-self-center">
-                  <i class="fas fa-pencil-alt text-info fa-3x me-4"></i>
+                  <i class="fas fa-user text-info fa-3x me-4"></i>
                 </div>
-                <div>
+                <div id="appointment-details">
                   <h4>Total Posts</h4>
                   <p class="mb-0">Monthly blog posts</p>
                 </div>
@@ -310,7 +317,7 @@ User - Home
           </div>
         </div>
       </div>
-      <div class="col-xl-6 col-md-12 mb-4">
+      <!-- <div class="col-xl-6 col-md-12 mb-4">
         <div class="card">
           <div class="card-body">
             <div class="d-flex justify-content-between p-md-1">
@@ -370,13 +377,12 @@ User - Home
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
   <!--Section: Statistics with subtitles-->
 </div>
-
 
 
 {% endblock %}
