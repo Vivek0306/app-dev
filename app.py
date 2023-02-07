@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 from wtforms import *#form creation
 from wtforms.validators import *
 from flask_bcrypt import Bcrypt
-from datetime import datetime, timedelta
+from datetime import datetime, date
 import datetime
 
 
@@ -31,7 +31,18 @@ login_manager.login_view = "userlogin"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+# CUSTOM FUNCTIONS
 
+def calculate_age(born):
+    today = date.today()
+    age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+    if age <= 0:
+        return 1
+    else:
+        return age
+app.jinja_env.filters['calculate_age'] = calculate_age
+
+# PORGRAM MODELS
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -55,7 +66,6 @@ class Doctor(db.Model, UserMixin):
 class Appointment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    # user = db.relationship('User', backref='user')
     slot = db.Column(db.String(50), nullable=False)
     date = db.Column(db.Date, nullable=False)
 
@@ -170,7 +180,12 @@ def doctorlogin():
 @app.route("/home", methods=['GET','POST'])
 @login_required
 def home():
-    appointments = Appointment.query.filter_by(user_id = current_user.id).all()
+    check_user = User.query.filter_by(id = current_user.id).first()
+    if check_user.is_doctor:
+        appointments = db.session.query(Appointment, User).join(User).all()
+    else:
+        appointments = Appointment.query.filter_by(user_id = current_user.id).all()
+
     return render_template("home.html", appointments=appointments)
 
 # APPOINTMENT

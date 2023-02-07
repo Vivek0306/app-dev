@@ -64,3 +64,109 @@
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&amp;display=swap" rel="stylesheet">
 </body>
 </html>
+
+
+
+
+THIS IS THE HOME PAGE USER DETAIlS SECTION
+
+
+
+<div class="home-dashboard">
+    <div class="container">
+        <div class="row g-xl-2 align-items-center">
+            <div class="col-md-3">
+                <!-- <img class="img-fluid mb-5 mb-md-0" src="assets/img/illustrations/about-1.png" width="480" alt="" /> -->
+                <div class="col-12 col-sm-9 col-md-12 mt-12">
+                    <div class="card h-100 rounded-3 shadow">
+                      <div class="card-body p-4 text-center text-md-start">
+                        <!-- <h5 class="fw-bold">Disease detection</h5>
+                        <p class="card-text">In this case, the role of the health laboratory is very important to do a disease detection...</p><a class="stretched-link text-decoration-none" href="#" role="button">Read more
+                          <svg class="bi bi-arrow-right-short" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                          </svg></a> -->
+                          <div class="text-center">
+                            <h5 class="fw-bold">Patient Details</h5>
+
+                            <ul style="list-style: none;padding-left: 0;">
+                                {%  if current_user.is_doctor %}
+                                <li><p><strong>Dr.</strong> {{ current_user.name }}</p></li>
+                                {% else %}
+                                <li><p>{{ current_user.name }}</p></li>
+                                {% endif %}
+                                <li><p>{{ current_user.gender }}</p></li>
+                                <li><p>{{ current_user.dob.strftime('%d-%m-%Y') }}</p></li>
+                            </ul>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-9 text-center text-md-start">
+                <!-- <h2 class="fw-bold lh-base">Leading healthcare <br />providers</h2>
+                <hr class="text-dark mx-auto mx-md-0" style="height:2px;width:50px" />
+                <p class="pt-3">Trafalgar provides progressive, and affordable healthcare, accessible on mobile and online for everyone. To us, it’s not just work. We take pride in the solutions we deliver</p>
+                <div class="py-3">
+                    <button class="btn btn-lg btn-outline-primary rounded-pill" type="submit">Learn more </button>
+                </div> -->
+                <h4 class="lh-base">Welcome {{ current_user.username }}, to VOS Clinics!</h4>
+                <div class="row h-100 justify-content-center">
+                    <div class="col-12 col-sm-9 col-md-4 mt-4">
+                        <div class="card h-100 rounded-3 shadow"><img src="assets/img/gallery/article-1.png" alt="" />
+                          <div class="card-body p-4 text-center text-md-start">
+                            <h5 class="fw-bold">Available Doctors</h5>
+                            <p class="card-text">In this case, the role of the health laboratory is very important to do a disease detection...</p><a class="stretched-link text-decoration-none" href="#" role="button">Read more
+                              <svg class="bi bi-arrow-right-short" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                              </svg></a>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-sm-9 col-md-4 mt-4">
+                        <div class="card h-100 rounded-3 shadow"><img src="assets/img/gallery/article-1.png" alt="" />
+                          <div class="card-body p-4 text-center text-md-start">
+                            <h5 class="fw-bold">Last Consultation</h5>
+                            <p class="card-text">In this case, the role of the health laboratory is very important to do a disease detection...</p><a class="stretched-link text-decoration-none" href="#" role="button">Read more
+                              <svg class="bi bi-arrow-right-short" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                              </svg></a>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-sm-9 col-md-4 mt-4">
+                        <div class="card h-100 rounded-3 shadow"><img src="assets/img/gallery/article-1.png" alt="" />
+                          <div class="card-body p-4 text-center text-md-start">
+                            <h5 class="fw-bold">Your Appointments</h5>
+                            <!-- <p class="card-text">In this case, the role of the health laboratory is very important to do a disease detection...</p><a class="stretched-link text-decoration-none" href="#" role="button">Read more
+                              <svg class="bi bi-arrow-right-short" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+                              </svg></a> -->
+                              <div class="text-center">
+                                {% if appointments|length == 0 %}
+                                <p>No appointments made.</p>
+                                {% else %}
+                                <table>
+                                  <tr>
+                                    <th>Date</th>
+                                    <th>Slot</th>
+                                  </tr>
+                                  {% for appointment in appointments %}
+                                    <tr>
+                                      <td>{{ appointment.date.strftime('%d-%m-%Y') }}</td>
+                                      <td>{{ appointment.slot.capitalize() }}</td>
+                                    </tr>
+                                  {% endfor %}
+                                </table>
+                                {% endif %}
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
