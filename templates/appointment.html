@@ -5,16 +5,24 @@ Appointment
 
 {% block main %}
 
-<div class="home-dashboard">
-    <div class="container">
-        <h1>Appointment Page</h1>
-        <form method="post">
-            {{ form.hidden_tag() }}
-            {{ form.slot.label }} {{ form.slot(class = "form-control") }}
-            {{ form.date.label }} {{ form.date }}
-            {{ form.submit() }}
-        </form>
-          
+<div class="container pt-5">
+    <div class="pt-5 pt-md-2">
+        <h1>Book your Appointment</h1>
+        <div class="h-100 pt-3 d-flex align-items-center justify-content-center">
+            <form method="post" class="form-control w-75">
+                {{ form.hidden_tag() }}
+                <h5>{{ form.slot.label }}</h5> 
+                <div class="col-xs-4 mb-3">
+                    {{ form.slot(class = "form-control") }}
+                </div>
+                <h5>{{ form.date.label }}</h5> 
+                <div class="col-xs-4 mb-3">
+                {{ form.date(class="form-control")}}
+                </div>
+                {{ form.submit(class="btn btn-primary")}}
+            </form>
+        </div>
+
     </div>
 </div>
 

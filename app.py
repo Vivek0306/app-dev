@@ -48,7 +48,6 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(50), nullable=False)
-    # patients = db.relationship('Patient', backref='user')
     name = db.Column(db.String(50), nullable=False)
     address = db.Column(db.String(80))
     city = db.Column(db.String(30))
@@ -103,9 +102,9 @@ class RegisterForm(FlaskForm):
             raise ValidationError("Username already exists.")
         
 class AppointmentForm(FlaskForm):
-    slot = SelectField("Appointment Slot", choices=[("morning", "Morning (9am-12pm)"), ("afternoon", "Afternoon (1pm-4pm)"), ("evening", "Evening (5pm-8pm)")])
-    date = DateField("Appointment Date")
-    submit = SubmitField("Book Appointment")
+    slot = SelectField("Appointment Slot", choices=[("morning", "Morning (9am-12pm)"), ("afternoon", "Afternoon (1pm-4pm)"), ("evening", "Evening (5pm-8pm)")], validators=[InputRequired()])
+    date = DateField("Appointment Date",validators=[InputRequired()])
+    submit = SubmitField("Book Appointment",validators=[InputRequired()])
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)])
@@ -177,16 +176,19 @@ def doctorlogin():
 
 
 # DASHBOARD
-@app.route("/home", methods=['GET','POST'])
+@app.route("/home/<int:id>", methods=['GET','POST'])
+@app.route("/home/")
 @login_required
-def home():
+def home(id=None):
     check_user = User.query.filter_by(id = current_user.id).first()
     if check_user.is_doctor:
         appointments = db.session.query(Appointment, User).join(User).filter(Appointment.date == date.today()).order_by(Appointment.date).all()
     else:
         appointments = Appointment.query.filter_by(user_id = current_user.id).all()
-
-    return render_template("home.html", appointments=appointments)
+    appointment = None
+    if id is not None:
+        appointment = db.session.query(Appointment, User).join(User).filter(Appointment.id == id).all()
+    return render_template("home.html", appointments=appointments, appointment=appointment)
 
 # APPOINTMENT
 @app.route("/appointment", methods=["GET", "POST"])
@@ -201,6 +203,17 @@ def appointment():
         db.session.commit()
         return redirect(url_for("home"))
     return render_template("appointment.html", form=form)
+
+
+
+@app.route('/delete_appointment/<int:id>', methods=['POST','GET'])
+@login_required
+def delete_appointment(id):
+    appointment = Appointment.query.get(id)
+    db.session.delete(appointment)
+    db.session.commit()
+    return redirect(url_for('home'))
+
 
 
 

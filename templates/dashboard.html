@@ -12,10 +12,11 @@
   <!-- Google Fonts Roboto -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
   <!-- MDB -->
-  <link rel="stylesheet" href="static/css/mdb.min.css" />
+  <!-- href="static/css/mdb.min.css"  -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/mdb.min.css') }}" />
   <!-- Custom styles -->
-  <link rel="stylesheet" href="static/css/admin.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+  <!-- href="static/css/admin.css" -->
+  <link rel="stylesheet"  href="{{ url_for('static', filename='css/admin.css') }}"/>
 </head>
 
 <body>
@@ -25,17 +26,17 @@
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-4">
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+          <a href="{{ url_for('home') }}" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'home' %}active{% endif %}" aria-current="true">
             <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Home</span>
           </a>
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple active">
+          <a href="#" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'consultation' %}active{% endif %}">
             <i class="fas fa-chart-area fa-fw me-3"></i><span>My Consultations</span>
           </a>
-          <a href="{{ url_for('appointment') }}" class="list-group-item list-group-item-action py-2 ripple"><i
+          <a href="{{ url_for('appointment') }}" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'appointment' %}active{% endif %}"><i
               class="fas fa-calendar fa-fw me-3"></i><span>My Appointments</span></a>
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
+          <a href="#" class="list-group-item list-group-item-action py-3 ripple"><i
               class="fas fa-user fa-fw me-3"></i><span>Profile</span></a>
-          <a href="{{ url_for('logout') }}" class="list-group-item list-group-item-action py-2 ripple">
+          <a href="{{ url_for('logout') }}" class="list-group-item list-group-item-action py-3 ripple">
             <i class="fas fa-lock fa-fw me-3"></i><span>Logout</span>
           </a>
         </div>
@@ -53,7 +54,7 @@
           <i class="fas fa-bars"></i>
         </button>
         <!-- Brand -->
-        <a class="navbar-brand d-flex align-items-center fw-bold" href="/"><img class="d-inline-block me-3" src="static/img/icons/logo.png" alt="" />VOS Medi Assist</a>
+        <a class="navbar-brand d-flex align-items-center fw-bold" href="/"><img class="d-inline-block me-3" " src="{{ url_for('static', filename='img/icons/logo.png') }}" alt="" />VOS Medi Assist</a>
         <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row">
           <!-- Notification dropdown -->
@@ -102,9 +103,12 @@
 
 
   <!-- MDB -->
-  <script type="text/javascript" src="static/js/mdb.min.js"></script>
+
+  <!-- src="static/js/mdb.min.js" -->
+  <script type="text/javascript"  src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
   <!-- Custom scripts -->
-  <script type="text/javascript" src="static/js/admin.js"></script>
+  <!-- src="static/js/admin.js" -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/admin.js') }}"></script>
 
 </body>
 
