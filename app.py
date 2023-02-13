@@ -42,6 +42,9 @@ def calculate_age(born):
         return age
 app.jinja_env.filters['calculate_age'] = calculate_age
 
+def order_by_slot(appointment):
+    return {'morning': 1, 'afternoon': 2, 'evening': 3}[appointment.slot]
+
 # PORGRAM MODELS
 
 class User(db.Model, UserMixin):
@@ -67,6 +70,7 @@ class Appointment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     slot = db.Column(db.String(50), nullable=False)
     date = db.Column(db.Date, nullable=False)
+    status = db.Column(db.Boolean, default=False, nullable=False)
 
 
 # ****** FORMS *******
@@ -182,13 +186,19 @@ def doctorlogin():
 def home(id=None):
     check_user = User.query.filter_by(id = current_user.id).first()
     if check_user.is_doctor:
-        appointments = db.session.query(Appointment, User).join(User).filter(Appointment.date == date.today()).order_by(Appointment.date).all()
+        appointments = db.session.query(Appointment, User).join(User).filter(Appointment.date == date.today()).order_by(db.case({
+            'morning': 1,
+            'afternoon': 2,
+            'evening': 3
+        }, value=Appointment.slot)).all()
     else:
         appointments = Appointment.query.filter_by(user_id = current_user.id).all()
+
     appointment = None
     if id is not None:
         appointment = db.session.query(Appointment, User).join(User).filter(Appointment.id == id).all()
     return render_template("home.html", appointments=appointments, appointment=appointment)
+
 
 # APPOINTMENT
 @app.route("/appointment", methods=["GET", "POST"])
@@ -198,7 +208,7 @@ def appointment():
     if form.validate_on_submit():
         slot = form.slot.data
         date = form.date.data
-        appointment = Appointment(user_id = current_user.id, slot=slot, date=date)
+        appointment = Appointment(user_id = current_user.id, slot=slot, date=date, status=False)
         db.session.add(appointment)
         db.session.commit()
         return redirect(url_for("home"))
