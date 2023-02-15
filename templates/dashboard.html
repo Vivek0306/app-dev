@@ -29,11 +29,17 @@
           <a href="{{ url_for('home') }}" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'home' %}active{% endif %}" aria-current="true">
             <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Home</span>
           </a>
+          {% if current_user.is_doctor %}
+
           <a href="#" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'consultation' %}active{% endif %}">
             <i class="fas fa-chart-area fa-fw me-3"></i><span>My Consultations</span>
           </a>
+          {% endif %}
+          {% if not current_user.is_doctor %}
           <a href="{{ url_for('appointment') }}" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'appointment' %}active{% endif %}"><i
               class="fas fa-calendar fa-fw me-3"></i><span>My Appointments</span></a>
+          {% endif %}
+
           <a href="#" class="list-group-item list-group-item-action py-3 ripple"><i
               class="fas fa-user fa-fw me-3"></i><span>Profile</span></a>
           <a href="{{ url_for('logout') }}" class="list-group-item list-group-item-action py-3 ripple">

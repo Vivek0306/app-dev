@@ -92,9 +92,10 @@ User - Home
       </button>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+      {{ appointment.id }}
+      <a href="/delete_appointment/{{ id }}" type="button" class="btn btn-danger">
         Mark Done
-      </button>
+      </a>
     </div>
   </div>
   {% endif %}

@@ -197,7 +197,7 @@ def home(id=None):
     appointment = None
     if id is not None:
         appointment = db.session.query(Appointment, User).join(User).filter(Appointment.id == id).all()
-    return render_template("home.html", appointments=appointments, appointment=appointment)
+    return render_template("home.html", appointments=appointments, appointment=appointment, id=id)
 
 
 # APPOINTMENT
