@@ -31,13 +31,15 @@
           </a>
           {% if current_user.is_doctor %}
 
-          <a href="#" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'consultation' %}active{% endif %}">
+          <a href="{{ url_for('myappointments') }}" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'myappointments' %}active{% endif %}">
             <i class="fas fa-chart-area fa-fw me-3"></i><span>My Consultations</span>
           </a>
           {% endif %}
           {% if not current_user.is_doctor %}
           <a href="{{ url_for('appointment') }}" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'appointment' %}active{% endif %}"><i
-              class="fas fa-calendar fa-fw me-3"></i><span>My Appointments</span></a>
+              class="fas fa-calendar fa-fw me-3"></i><span>Book Appointment</span></a>
+          <a href="{{ url_for('myappointments') }}" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'myappointments' %}active{% endif %}"><i
+                class="fas fa-calendar fa-fw me-3"></i><span>My Appointments</span></a>
           {% endif %}
 
           <a href="#" class="list-group-item list-group-item-action py-3 ripple"><i

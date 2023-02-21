@@ -5,164 +5,73 @@ User - Home
 
 
 {% block main %}
-
-<div class="container pt-4">
-  <!--Section: Sales Performance KPIs-->
-  <section class="mb-4">
-    <div class="card">
-      <div class="card-header text-center py-3">
-        <h5 class="mb-0 text-center">
-          <strong>Current Appointments</strong>
-        </h5>
-      </div>
-      {% if current_user.is_doctor %}
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-hover text-nowrap">
-            <thead>
-              <tr>
-                <th scope="col">Appointment No.</th>
-                <th scope="col">Patient Name</th>
-                <th scope="col">Age</th>
-                <th scope="col">DOB</th>
-                <th scope="col">Slot</th>
-                <th scope="col">Actions</th>
-                <!-- <th scope="col">Avg. Price</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              {% for appointment in appointments %}
-                <tr id="{{ loop.index }}">
-                  <td>{{ loop.index }}</td>
-                  <td>{{ appointment.User.name }}</td>
-                  <td>{{ appointment.User.dob|calculate_age }}</td>
-                  <td>{{ appointment.User.dob.strftime('%d-%m-%Y') }}</td>
-                  <td>{{ appointment.Appointment.slot.capitalize() }}</td>
-                  <td>
-                    <!-- /home/{{ appointment.Appointment.id }} -->
-                    <!-- data-mdb-toggle="modal" data-mdb-target="#exampleModal" -->
-                    <a href="/home/{{ appointment.Appointment.id }}"><i class="fas fa-plus fa-fw me-3"></i></a> 
-                    <span>
-                      <a  href="{{ url_for('home') }}"><i class="fas fa-minus fa-fw me-3"></i></a>
-                    </span>
-                  </td>
-                </tr> 
-              {% endfor %}
-            </tbody>
-          </table>
+<div class="container py-5 px-5 ">
+    <div class="pt-5 pt-md-2">
+        <h1>Book your Appointment</h1>
+        <div class="">
+            <div class="row">
+                <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between px-md-1">
+                        <div class="align-self-center">
+                          <i class="fas fa-pencil-alt text-info fa-3x"></i>
+                        </div>
+                        <div class="text-end">
+                          <h3>278</h3>
+                          <p class="mb-0">New Posts</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between px-md-1">
+                        <div class="align-self-center">
+                          <i class="far fa-comment-alt text-warning fa-3x"></i>
+                        </div>
+                        <div class="text-end">
+                          <h3>156</h3>
+                          <p class="mb-0">New Comments</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between px-md-1">
+                        <div class="align-self-center">
+                          <i class="fas fa-chart-line text-success fa-3x"></i>
+                        </div>
+                        <div class="text-end">
+                          <h3>64.89 %</h3>
+                          <p class="mb-0">Bounce Rate</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between px-md-1">
+                        <div class="align-self-center">
+                          <i class="fas fa-map-marker-alt text-danger fa-3x"></i>
+                        </div>
+                        <div class="text-end">
+                          <h3>423</h3>
+                          <p class="mb-0">Total Visits</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
-      </div>
-      {% else %}
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-hover text-nowrap">
-            <thead>
-              <tr>
-                <th scope="col">Appointment No.</th>
-                <th scope="col">Appointment Date</th>
-                <th scope="col">Appointment Slot</th>
-                <th scope="col">Actions</th>
-                <!-- <th scope="col">Avg. Price</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              {% for appointment in appointments %}
-                <tr>
-                  <td>{{ loop.index }}</td>
-                  <td>{{ appointment.date.strftime('%d-%m-%Y') }}</td>
-                  <td>{{ appointment.slot.capitalize() }}</td>
-                  <td>
-                    <a href="/delete_appointment/{{ appointment.id }}"><i class="fas fa-trash fa-fw me-3"></i></a> 
-                  </td>
-                </tr> 
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      {% endif %}
     </div>
-  </section>
-  <!--Section: Sales Performance KPIs-->
-  {% if appointment %}
-  <div class="row align-items-center text-center">
-    <div class="col">
-      <button type="button" class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-        Process Patient
-      </button>
-    </div>
-    <div class="col">
-      {{ appointment.id }}
-      <a href="/delete_appointment/{{ id }}" type="button" class="btn btn-danger">
-        Mark Done
-      </a>
-    </div>
-  </div>
-  {% endif %}
-
 </div>
-
-
-
-<!-- ************** MODAL ************** -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Patient Details</h5>
-        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <section class="mb-4">
-            {% if appointment %}
-              <p>{{ appointment[0].slot }}</p>
-              {% for a in appointment %}
-                <div class="row">
-                  <div class="col"><strong>Personal Information</strong>   <i class="fas fa-user fa-fw me-3"></i></div>
-                </div>
-                <hr>
-                <div class="row text-center mb-4">
-                  <div class="col-4"><p><b>Name: </b>{{ a.User.name }}</p></div>
-                  <div class="col-4"><p><b>Age: </b>{{ a.User.dob|calculate_age }}</p></div>
-                  <div class="col-4"><p><b>Gender: </b>{{ a.User.gender }}</p></div>
-                </div>
-                <div class="row">
-                  <div class="col"><strong>Enter Consultation Details</strong>   <i class="fas fa-pen fa-fw me-3"></i></div>
-                </div>
-                <hr>
-                <textarea name="Enter here..." id="" cols="50" class="mb-4"></textarea>
-
-                <div class="row">
-                  <div class="col"><strong>Select Prescription</strong>   <i class="fas fa-capsules fa-fw me-3"></i></div>
-                </div>
-                <hr>
-                <ul style="list-style: none;">
-                  <li>
-                    <input type="checkbox" name="Steroids" id="c1">
-                    <label for="c1">Steroids</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="Analgesics" id="c2">
-                    <label for="c2">Analgesic</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="Painkillers" id="c3">
-                    <label for="c3">Painkiller</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="Antibiotics" id="c4">
-                    <label for="c3">Antibiotics</label>
-                  </li>
-                </ul>
-            
-              {% endfor %}
-            {% endif %}
-        </section>
-      </div>
-      <div class="modal-footer">
-        <a href="#" type="button" class="btn btn-danger" data-mdb-dismiss="modal">Close</a>
-        <a href="#" type="button" class="btn btn-success">Save changes</a>
-      </div>
-    </div>
-  </div>
 {% endblock %}

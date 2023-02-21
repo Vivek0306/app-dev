@@ -180,10 +180,20 @@ def doctorlogin():
 
 
 # DASHBOARD
-@app.route("/home/<int:id>", methods=['GET','POST'])
-@app.route("/home/")
+@app.route("/home", methods = ['GET', 'POST'])
 @login_required
-def home(id=None):
+def home():
+    check_user = User.query.filter_by(id = current_user.id).first()
+    if check_user.is_doctor:
+        render_template("home.html")
+    return render_template("home.html")
+
+
+
+@app.route("/myappointments/<int:id>", methods=['GET','POST'])
+@app.route("/myappointments/")
+@login_required
+def myappointments(id=None):
     check_user = User.query.filter_by(id = current_user.id).first()
     if check_user.is_doctor:
         appointments = db.session.query(Appointment, User).join(User).filter(Appointment.date == date.today()).order_by(db.case({
@@ -197,7 +207,7 @@ def home(id=None):
     appointment = None
     if id is not None:
         appointment = db.session.query(Appointment, User).join(User).filter(Appointment.id == id).all()
-    return render_template("home.html", appointments=appointments, appointment=appointment, id=id)
+    return render_template("myappointments.html", appointments=appointments, appointment=appointment, id=id)
 
 
 # APPOINTMENT
@@ -211,7 +221,7 @@ def appointment():
         appointment = Appointment(user_id = current_user.id, slot=slot, date=date, status=False)
         db.session.add(appointment)
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("myappointments"))
     return render_template("appointment.html", form=form)
 
 
@@ -222,7 +232,7 @@ def delete_appointment(id):
     appointment = Appointment.query.get(id)
     db.session.delete(appointment)
     db.session.commit()
-    return redirect(url_for('home'))
+    return redirect(url_for('myappointments'))
 
 
 
