@@ -7,8 +7,15 @@ User - Home
 {% block main %}
 <div class="container py-5 px-5 ">
     <div class="pt-5 pt-md-2">
-        <h1>Book your Appointment</h1>
-        <div class="">
+        {% if current_user.is_doctor %}
+            <h1>Hello! {{ current_user.name }}</h1>
+        {% else %}
+            <h1>Hello! {{ current_user.name }}</h1>
+        {% endif %}
+        <div class="container py-3">
+            <p id="quote"></p>
+        </div>
+        <div class="container py-5">
             <div class="row">
                 <div class="col-xl-3 col-sm-6 col-12 mb-4">
                   <div class="card">
@@ -74,4 +81,23 @@ User - Home
         </div>
     </div>
 </div>
+<script>
+var doctorQuotes = [
+  "The best doctor is the one you run to and can't find.",
+  "Wherever the art of medicine is loved, there is also a love of humanity.",
+  "Medicine is a science of uncertainty and an art of probability.",
+  "The greatest medicine of all is to teach people how not to need it.",
+  "The physician should not treat the disease but the patient who is suffering from it.",
+  "The art of medicine consists of amusing the patient while nature cures the disease. - Voltaire",  "The best doctor is the one you run to and can't find. - Denis Diderot",  "Wherever the art of medicine is loved, there is also a love of humanity. - Hippocrates",  "Medicine is a science of uncertainty and an art of probability. - William Osler",  "The greatest medicine of all is to teach people how not to need it. - Hippocrates",  "The physician should not treat the disease but the patient who is suffering from it. - Maimonides",  "The doctor is often more to be feared than the disease. - French Proverb",  "If you look at healthcare today, it's all about disease. It's not about understanding wellness at all. - Leroy Hood",  "A doctor's mission should be not just to prevent death, but also to improve the quality of life. - Patch Adams",  "To array a man's will against his sickness is the supreme art of medicine. - Henry Ward Beecher",  "The role of the physician is to heal, to comfort, to counsel, to alleviate pain. - Norman Cousins",  "A good physician treats the disease; a great physician treats the patient who has the disease. - William Osler"
+];
+function generateQuote() {
+        var randomIndex = Math.floor(Math.random() * doctorQuotes.length);
+        var quoteElement = document.getElementById("quote");
+        quoteElement.innerHTML = doctorQuotes[randomIndex];
+      }
+
+      // Call generateQuote() when the page is loaded
+      window.addEventListener("load", generateQuote);
+</script>
+
 {% endblock %}
