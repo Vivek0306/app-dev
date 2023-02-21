@@ -185,8 +185,12 @@ def doctorlogin():
 def home():
     check_user = User.query.filter_by(id = current_user.id).first()
     if check_user.is_doctor:
-        render_template("home.html")
-    return render_template("home.html")
+        appointments = db.session.query(Appointment, User).join(User).filter(Appointment.date == date.today()).order_by(db.case({
+            'morning': 1,
+            'afternoon': 2,
+            'evening': 3
+        }, value=Appointment.slot)).all()
+    return render_template("home.html", appointments = appointments)
 
 
 
