@@ -32,9 +32,9 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # CUSTOM FUNCTIONS
+today = date.today()
 
 def calculate_age(born):
-    today = date.today()
     age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
     if age <= 0:
         return 1
@@ -185,12 +185,22 @@ def doctorlogin():
 def home():
     check_user = User.query.filter_by(id = current_user.id).first()
     if check_user.is_doctor:
+        past_appointments = Appointment.query.filter(Appointment.date < today).all()
+        for appointment in past_appointments:
+            db.session.delete(appointment)
+        db.session.commit()
+
         appointments = db.session.query(Appointment, User).join(User).filter(Appointment.date == date.today()).order_by(db.case({
             'morning': 1,
             'afternoon': 2,
             'evening': 3
         }, value=Appointment.slot)).all()
-    return render_template("home.html", appointments = appointments)
+        done_appointments = Appointment.query.filter_by(status=True).count()
+
+    else:
+        appointments = None
+        done_appointments = None
+    return render_template("home.html", appointments = appointments, done_appointments = done_appointments)
 
 
 
@@ -200,7 +210,7 @@ def home():
 def myappointments(id=None):
     check_user = User.query.filter_by(id = current_user.id).first()
     if check_user.is_doctor:
-        appointments = db.session.query(Appointment, User).join(User).filter(Appointment.date == date.today()).order_by(db.case({
+        appointments = db.session.query(Appointment, User).join(User).filter(Appointment.date == date.today()).filter(Appointment.status == False).order_by(db.case({
             'morning': 1,
             'afternoon': 2,
             'evening': 3
@@ -238,7 +248,13 @@ def delete_appointment(id):
     db.session.commit()
     return redirect(url_for('myappointments'))
 
-
+@app.route('/markDone/<int:id>', methods=['GET', 'POST'])
+@login_required
+def markDone(id):
+    appointment = Appointment.query.get(id)
+    appointment.status = True
+    db.session.commit()
+    return redirect(url_for('myappointments'))
 
 
 # LOGOUT

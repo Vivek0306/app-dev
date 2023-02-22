@@ -9,78 +9,84 @@ User - Home
     <div class="pt-5 pt-md-2">
         {% if current_user.is_doctor %}
             <h1>Hello! {{ current_user.name }}</h1>
+            <div class="container py-3">
+              <p><i class="fas fa-quote-left"></i>  <span id="quote"></span>  </i><i class="fas fa-quote-right"></i></p>
+          </div>
+          <div class="container py-5">
+              <div class="row">
+                  <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between px-md-1">
+                          <div class="align-self-center">
+                            <i class="fas fa-comment-alt text-info fa-3x"></i>
+                          </div>
+                          <div class="text-end">
+                            <h3>{{ appointments|length }}</h3>
+                            <p class="mb-0">Today's Appointments</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between px-md-1">
+                          <div class="align-self-center">
+                            <i class="far fa-comment-alt text-warning fa-3x"></i>
+                          </div>
+                          <div class="text-end">
+                            <h3>{{ done_appointments }}</h3>
+                            <p class="mb-0">Appointments <br> Attended</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between px-md-1">
+                          <div class="align-self-center">
+                            <i class="fas fa-chart-line text-success fa-3x"></i>
+                          </div>
+                          <div class="text-end">
+                            <h3>64.89 %</h3>
+                            <p class="mb-0">Bounce <br> Rate</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between px-md-1">
+                          <div class="align-self-center">
+                            <i class="fas fa-map-marker-alt text-danger fa-3x"></i>
+                          </div>
+                          <div class="text-end">
+                            <h3>423</h3>
+                            <p class="mb-0">Total <br> Visits</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
         {% else %}
             <h1>Hello! {{ current_user.name }}</h1>
         {% endif %}
-        <div class="container py-3">
-            <p><i class="fas fa-quote-left"></i>  <strong><span id="quote"></span></strong>  </i><i class="fas fa-quote-right"></i></p>
-        </div>
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between px-md-1">
-                        <div class="align-self-center">
-                          <i class="fas fa-comment-alt text-info fa-3x"></i>
-                        </div>
-                        <div class="text-end">
-                          <h3>{{ appointments|length }}</h3>
-                          <p class="mb-0">Today's Appointments</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between px-md-1">
-                        <div class="align-self-center">
-                          <i class="far fa-comment-alt text-warning fa-3x"></i>
-                        </div>
-                        <div class="text-end">
-                          <h3>156</h3>
-                          <p class="mb-0">New Comments</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between px-md-1">
-                        <div class="align-self-center">
-                          <i class="fas fa-chart-line text-success fa-3x"></i>
-                        </div>
-                        <div class="text-end">
-                          <h3>64.89 %</h3>
-                          <p class="mb-0">Bounce Rate</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between px-md-1">
-                        <div class="align-self-center">
-                          <i class="fas fa-map-marker-alt text-danger fa-3x"></i>
-                        </div>
-                        <div class="text-end">
-                          <h3>423</h3>
-                          <p class="mb-0">Total Visits</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        </div>
+
     </div>
 </div>
+
+
+
+
+
 <script>
 var doctorQuotes = [
   "The best doctor is the one you run to and can't find.",

@@ -26,8 +26,8 @@ User - Appointments
                 <th scope="col">Age</th>
                 <th scope="col">DOB</th>
                 <th scope="col">Slot</th>
+                <!-- <th scope="col">Status</th> -->
                 <th scope="col">Actions</th>
-                <!-- <th scope="col">Avg. Price</th> -->
               </tr>
             </thead>
             <tbody>
@@ -38,6 +38,8 @@ User - Appointments
                   <td>{{ appointment.User.dob|calculate_age }}</td>
                   <td>{{ appointment.User.dob.strftime('%d-%m-%Y') }}</td>
                   <td>{{ appointment.Appointment.slot.capitalize() }}</td>
+                  <!-- <td>{{ appointment.Appointment.status }}</td> -->
+
                   <td>
                     <!-- /home/{{ appointment.Appointment.id }} -->
                     <!-- data-mdb-toggle="modal" data-mdb-target="#exampleModal" -->
@@ -93,7 +95,7 @@ User - Appointments
     </div>
     <div class="col">
       {{ appointment.id }}
-      <a href="/delete_appointment/{{ id }}" type="button" class="btn btn-danger">
+      <a href="/markDone/{{ id }}" type="button" class="btn btn-danger">
         Mark Done
       </a>
     </div>
@@ -161,7 +163,7 @@ User - Appointments
       </div>
       <div class="modal-footer">
         <a href="#" type="button" class="btn btn-danger" data-mdb-dismiss="modal">Close</a>
-        <a href="#" type="button" class="btn btn-success">Save changes</a>
+        <a href="/markDone/{{ id }}" type="button" class="btn btn-success">Save changes</a>
       </div>
     </div>
   </div>
