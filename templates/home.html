@@ -24,6 +24,9 @@ User - Home
                           <div class="text-end">
                             <h3>{{ appointments|length }}</h3>
                             <p class="mb-0">Today's Appointments</p>
+                            <a href="{{ url_for('myappointments') }}">View  
+                              <i class="fas fa-arrow-right"></i>
+                            </a>
                           </div>
                         </div>
                       </div>
@@ -37,8 +40,8 @@ User - Home
                             <i class="far fa-comment-alt text-warning fa-3x"></i>
                           </div>
                           <div class="text-end">
-                            <h3>{{ done_appointments }}</h3>
-                            <p class="mb-0">Appointments <br> Attended</p>
+                            <h3>{{ notdone_appointments }}</h3>
+                            <p class="mb-0">Appointments <br> Left</p>
                           </div>
                         </div>
                       </div>

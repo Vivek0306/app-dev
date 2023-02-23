@@ -207,12 +207,12 @@ def home():
             'afternoon': 2,
             'evening': 3
         }, value=Appointment.slot)).all()
-        done_appointments = Appointment.query.filter_by(status=True).count()
+        notdone_appointments = Appointment.query.filter_by(status=False).count()
 
     else:
         appointments = None
-        done_appointments = None
-    return render_template("home.html", appointments = appointments, done_appointments = done_appointments)
+        notdone_appointments = None
+    return render_template("home.html", appointments = appointments, notdone_appointments = notdone_appointments)
 
 
 

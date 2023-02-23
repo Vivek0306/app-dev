@@ -77,7 +77,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               {% if current_user.is_doctor %}
-              <li><a class="dropdown-item" href="{{ url_for('myappointmentS') }}">My Consultations</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('myappointments') }}">My Consultations</a></li>
               {% else %}
               <li><a class="dropdown-item" href="{{ url_for('appointment') }}">Book Appointment</a></li>
               <li><a class="dropdown-item" href="{{ url_for('myappointments') }}">My Appointments</a></li>
