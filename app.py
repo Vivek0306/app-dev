@@ -224,6 +224,11 @@ def myappointments(id=None):
     return render_template("myappointments.html", appointments=appointments, appointment=appointment, id=id)
 
 
+@app.route("/profile", methods=['GET', 'POST'])
+@login_required
+def profile():
+    return render_template("profile.html")
+
 # APPOINTMENT
 @app.route("/appointment", methods=["GET", "POST"])
 @login_required
