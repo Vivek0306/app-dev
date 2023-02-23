@@ -58,7 +58,7 @@ class User(db.Model, UserMixin):
     gender = db.Column(db.String(10), nullable=False)
     is_doctor = db.Column(db.Boolean, default=False, nullable=False)
     mobile = db.Column(db.Integer)
-
+        
 class Doctor(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
@@ -91,7 +91,7 @@ class Doc_RegisterForm(FlaskForm):
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "User Name"})
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Password"})
-    fullname = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Full Name"})
+    name = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Full Name"})
     gender = RadioField('Gender', choices=[('Male'),('Female'),('Other')])
     address = StringField(validators=[InputRequired(), Length(min=4, max=100)], render_kw={"placeholder": "Address"})
     mobile = StringField(validators=[InputRequired(), Length(min=10, max=12)], render_kw={"placeholder": "Mobile No."})
@@ -104,7 +104,23 @@ class RegisterForm(FlaskForm):
         existing_user_username = User.query.filter_by(username=username.data).first()
         if existing_user_username:
             raise ValidationError("Username already exists.")
-        
+    
+class EditForm(FlaskForm):
+    username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "User Name"}, name='username')
+    name = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Full Name"}, name='name')
+    gender = RadioField('Gender', choices=[('Male'),('Female'),('Other')], name='gender')
+    address = StringField(validators=[InputRequired(), Length(min=4, max=100)], render_kw={"placeholder": "Address"}, name='address')
+    mobile = StringField(validators=[InputRequired(), Length(min=10, max=12)], render_kw={"placeholder": "Mobile No."}, name='mobile')
+    city = StringField(validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder": "City"}, name='city')
+    dob = DateField(validators=[InputRequired()],render_kw={"placeholder": "Date of Birth"}, name='dob')
+    submit = SubmitField("Save Changes")
+
+    def validate_username(self, username):
+        existing_user_username = User.query.filter_by(username=username.data).first()
+        if existing_user_username:
+            raise ValidationError("Username already exists.")
+
+
 class AppointmentForm(FlaskForm):
     slot = SelectField("Appointment Slot", choices=[("morning", "Morning (9am-12pm)"), ("afternoon", "Afternoon (1pm-4pm)"), ("evening", "Evening (5pm-8pm)")], validators=[InputRequired()])
     date = DateField("Appointment Date",validators=[InputRequired()])
@@ -122,7 +138,7 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data)
-        new_user = User(username=form.username.data, password=hashed_password, name=form.fullname.data, address = form.address.data, city = form.city.data, dob=form.dob.data,gender=form.gender.data, is_doctor = False, mobile = form.mobile.data)
+        new_user = User(username=form.username.data, password=hashed_password, name=form.name.data, address = form.address.data, city = form.city.data, dob=form.dob.data,gender=form.gender.data, is_doctor = False, mobile = form.mobile.data)
         db.session.add(new_user)
         db.session.commit()
         flash("You have successfully registered! Please login to continue.")
@@ -135,7 +151,7 @@ def doctorRegister():
     form = Doc_RegisterForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data)
-        new_user = User(username=form.username.data, password=hashed_password, name=form.fullname.data, dob=form.dob.data, gender=form.gender.data, is_doctor = True)
+        new_user = User(username=form.username.data, password=hashed_password, name=form.name.data, dob=form.dob.data, gender=form.gender.data, is_doctor = True)
 
         db.session.add(new_user)
         db.session.commit()
@@ -228,6 +244,16 @@ def myappointments(id=None):
 @login_required
 def profile():
     return render_template("profile.html")
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditForm(obj=current_user)
+    if form.validate_on_submit():
+        form.populate_obj(current_user)
+        db.session.commit()
+        return redirect(url_for('profile'))
+    return render_template('edit_profile.html', form=form)
 
 # APPOINTMENT
 @app.route("/appointment", methods=["GET", "POST"])
