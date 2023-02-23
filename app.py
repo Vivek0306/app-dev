@@ -251,6 +251,16 @@ def edit_profile():
         return redirect(url_for('profile'))
     return render_template('edit_profile.html', form=form)
 
+@app.route("/delete_profile", methods=['GET', 'POST'])
+@login_required
+def delete_profile():
+    user_id = current_user.id
+    User.query.filter_by(id=user_id).delete()
+    Appointment.query.filter_by(user_id = user_id).delete()
+    db.session.commit()
+    return redirect(url_for('logout'))
+
+
 # APPOINTMENT
 @app.route("/appointment", methods=["GET", "POST"])
 @login_required

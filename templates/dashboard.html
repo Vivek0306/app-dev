@@ -76,9 +76,13 @@
               <span class="badge rounded-pill badge-notification bg-danger">3</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">My Consultations</a></li>
-              <li><a class="dropdown-item" href="#">My Appointments</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              {% if current_user.is_doctor %}
+              <li><a class="dropdown-item" href="{{ url_for('myappointmentS') }}">My Consultations</a></li>
+              {% else %}
+              <li><a class="dropdown-item" href="{{ url_for('appointment') }}">Book Appointment</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('myappointments') }}">My Appointments</a></li>
+              {% endif %}
+              <li><a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a></li>
             </ul>
           </li>
           <!-- Avatar -->
