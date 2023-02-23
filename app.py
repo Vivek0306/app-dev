@@ -115,10 +115,6 @@ class EditForm(FlaskForm):
     dob = DateField(validators=[InputRequired()],render_kw={"placeholder": "Date of Birth"}, name='dob')
     submit = SubmitField("Save Changes")
 
-    def validate_username(self, username):
-        existing_user_username = User.query.filter_by(username=username.data).first()
-        if existing_user_username:
-            raise ValidationError("Username already exists.")
 
 
 class AppointmentForm(FlaskForm):

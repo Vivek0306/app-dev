@@ -42,7 +42,7 @@
                 class="fas fa-calendar fa-fw me-3"></i><span>My Appointments</span></a>
           {% endif %}
 
-          <a href="{{ url_for('profile') }}" class="list-group-item list-group-item-action py-3 ripple"><i
+          <a href="{{ url_for('profile') }}" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'profile' %}active{% endif %}"><i
               class="fas fa-user fa-fw me-3"></i><span>Profile</span></a>
           <a href="{{ url_for('logout') }}" class="list-group-item list-group-item-action py-3 ripple">
             <i class="fas fa-lock fa-fw me-3"></i><span>Logout</span>
