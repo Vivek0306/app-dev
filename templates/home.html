@@ -23,10 +23,7 @@ User - Home
                           </div>
                           <div class="text-end">
                             <h3>{{ appointments|length }}</h3>
-                            <p class="mb-0">Today's Appointments</p>
-                            <a href="{{ url_for('myappointments') }}">View  
-                              <i class="fas fa-arrow-right"></i>
-                            </a>
+                            <a href="{{ url_for('myappointments') }}" class="mb-0">Today's Appointments <i class="fas fa-arrow-right"></i></a>
                           </div>
                         </div>
                       </div>
@@ -55,8 +52,8 @@ User - Home
                             <i class="fas fa-chart-line text-success fa-3x"></i>
                           </div>
                           <div class="text-end">
-                            <h3>64.89 %</h3>
-                            <p class="mb-0">Bounce <br> Rate</p>
+                            <h3>{{ done_appointments }}</h3>
+                            <p class="mb-0">Appointments <br> Done</p>
                           </div>
                         </div>
                       </div>
@@ -81,6 +78,73 @@ User - Home
           </div>
         {% else %}
             <h1>Hello! {{ current_user.name }}</h1>
+            <div class="container py-5">
+              <div class="container p-3">
+                <h3>What's on your mind today?</h3>
+              </div>
+              <div class="row">
+                  <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between px-md-1">
+                          <div class="align-self-center">
+                            <i class="fas fa-comment-alt text-info fa-3x"></i>
+                          </div>
+                          <div class="text-end">
+                            <h3>1. </h3>
+                            <a href="{{ url_for('appointment') }}" class="mb-0">Book Appointment</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between px-md-1">
+                          <div class="align-self-center">
+                            <i class="far fa-comment-alt text-warning fa-3x"></i>
+                          </div>
+                          <div class="text-end">
+                            <h3>2. </h3>
+                            <a href="{{ url_for('myappointments') }}" class="mb-0">View your Appointments</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between px-md-1">
+                          <div class="align-self-center">
+                            <i class="fas fa-chart-line text-success fa-3x"></i>
+                          </div>
+                          <div class="text-end">
+                            <h3>3. </h3>
+                            <a href="{{ url_for('myappointments') }}" class="mb-0">Manage your Appointments</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between px-md-1">
+                          <div class="align-self-center">
+                            <i class="fas fa-map-marker-alt text-danger fa-3x"></i>
+                          </div>
+                          <div class="text-end">
+                            <h3>4. </h3>
+                            <a href="{{ url_for('profile') }}" class="mb-0">Manage your Profile</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
         {% endif %}
 
     </div>
