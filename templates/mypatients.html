@@ -1,0 +1,46 @@
+{% extends "dashboard.html" %}
+{% block title %}
+User - My Patients
+{% endblock %}
+
+
+{% block main %}
+<div class="continer pt-5">
+    <section class="mb-4">
+        <div class="card">
+          <div class="card-header text-center py-3">
+            <h5 class="mb-0 text-center">
+              <strong>Patient Information</strong>
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for patient in patients %}
+                    <tr id="{{ loop.index }}">
+                      <td>{{ loop.index }}</td>
+                      <td>{{ patient.name }}</td>
+                      <td>{{ patient.username }}</td>
+                      <td>{{ patient.dob|calculate_age }}</td>
+                      <td>
+                        <a href="#" class="btn btn-primary">View  <i class="fas fa-eye fa-fw"></i></a> 
+                      </td>
+                    </tr> 
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </section>
+</div>
+{% endblock %}

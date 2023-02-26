@@ -34,6 +34,9 @@
           <a href="{{ url_for('myappointments') }}" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'myappointments' %}active{% endif %}">
             <i class="fas fa-chart-area fa-fw me-3"></i><span>My Consultations</span>
           </a>
+          <a href="{{ url_for('mypatients') }}" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'mypatients' %}active{% endif %}">
+            <i class="fas fa-chart-area fa-fw me-3"></i><span>My Patients</span>
+          </a>
           {% endif %}
           {% if not current_user.is_doctor %}
           <a href="{{ url_for('appointment') }}" class="list-group-item list-group-item-action py-3 ripple {% if request.endpoint == 'appointment' %}active{% endif %}"><i

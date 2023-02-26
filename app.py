@@ -237,7 +237,7 @@ def myappointments(id=None):
         appointment = db.session.query(Appointment, User).join(User).filter(Appointment.id == id).all()
     return render_template("myappointments.html", appointments=appointments, appointment=appointment, id=id)
 
-
+# PROFILE
 @app.route("/profile", methods=['GET', 'POST'])
 @login_required
 def profile():
@@ -261,6 +261,16 @@ def delete_profile():
     Appointment.query.filter_by(user_id = user_id).delete()
     db.session.commit()
     return redirect(url_for('logout'))
+
+# PATIENTS
+@app.route("/mypatients", methods=['GET', 'POST'])
+@login_required
+def mypatients():
+    if current_user.is_doctor:
+        patients = User.query.filter_by(is_doctor = False).all()
+        return render_template('mypatients.html', patients = patients)
+    else:
+        return redirect(url_for('home'))
 
 
 # APPOINTMENT
