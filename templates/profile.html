@@ -12,8 +12,14 @@ User - Profile
             <div class="col-lg-4">
               <div class="card mb-4">
                 <div class="card-body text-center">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                    class="rounded-circle img-fluid" style="width: 150px;">
+                  <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;"> -->
+                  {% if current_user.gender == 'Male' %}
+                    <img src="{{ url_for('static', filename='img/icons/male-icon.jpg') }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                  {% else %}
+                    <img src="{{ url_for('static', filename='img/icons/female-icon.png') }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                  {% endif %}
+
+
                   <h5 class="my-3">{{ current_user.name }}</h5>
                   {% if current_user.is_doctor %}
                     <p class="text-muted mb-1">Doctor, {{ current_user.gender }}</p>
