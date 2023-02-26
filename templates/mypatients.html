@@ -33,7 +33,7 @@ User - My Patients
                       <td>{{ patient.username }}</td>
                       <td>{{ patient.dob|calculate_age }}</td>
                       <td>
-                        <a href="#" class="btn btn-primary">View  <i class="fas fa-eye fa-fw"></i></a> 
+                        <a href="/viewpatient/{{ patient.id }}" class="btn btn-primary">View  <i class="fas fa-eye fa-fw"></i></a> 
                       </td>
                     </tr> 
                   {% endfor %}

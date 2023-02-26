@@ -272,6 +272,16 @@ def mypatients():
     else:
         return redirect(url_for('home'))
 
+@app.route("/viewpatient/<int:id>", methods=['GET', 'POST'])
+@login_required
+def viewpatient(id):
+    if current_user.is_doctor:
+        patient = User.query.filter_by(id = id).first()
+        return render_template('viewpatient.html', patient = patient)
+    else:
+        return redirect(url_for('home'))
+
+
 
 # APPOINTMENT
 @app.route("/appointment", methods=["GET", "POST"])

@@ -1,0 +1,100 @@
+{% extends "dashboard.html" %}
+{% block title %}
+User - My Patients
+{% endblock %}
+
+
+{% block main %}
+<div class="container pt-5">
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                  <h5 class="my-3">{{ patient.name }}</h5>
+                    <p class="text-muted mb-1">Patient, {{ patient.gender }}</p>
+                    <p class="text-muted mb-4">{{ patient.address }}</p>
+                  <div class="d-flex justify-content-center mb-2">
+                    <a href="{{ url_for('mypatients') }}" class="btn btn-primary">Back to Patient List</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="my-3">Personal Information</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">Full Name</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ patient.name }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">Username</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ patient.username }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">Date of Birth</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ patient.dob }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">Gender</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ patient.gender }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">Mobile</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ patient.mobile }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">Address</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ patient.address }}</p>
+                        </div>
+                    </div>
+                    <hr>  
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">City</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ patient.city }}</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</div>
+{% endblock %}
