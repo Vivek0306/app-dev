@@ -7,8 +7,8 @@ from wtforms import *#form creation
 from wtforms.validators import *
 from flask_bcrypt import Bcrypt
 from datetime import datetime, date
-import datetime
 
+    
 
 # ******CONFIG******
 
@@ -324,7 +324,7 @@ def logout():
     return redirect(url_for('userlogin'))
 
 
-@app.context_processor
+@app.context_processor  
 def inject_datetime():
     return dict(datetime=datetime)
 
